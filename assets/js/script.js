@@ -3,8 +3,11 @@ var statEl2= document.querySelector("#city2Stats")
 // sets stats as global since I call them in two functions
 var stats1=''
 var stats2=''
+var promiseArray = []
+var responseArray = []
 // does 4 api calls to get our stats for the two teams
  function getStats(city1,city2) {
+     promiseArray.push("city1")
     //  first fetch takes the city name and searches for a team so I can get its id, because it looks like the stats page needs team id and not the team city.
     fetch("https://api-nba-v1.p.rapidapi.com/teams?search="+city1, {
 	"method": "GET",
@@ -29,6 +32,20 @@ var stats2=''
             // I save the stats in a variable and then I run the same 2 calls again but for the second city, at the end running showStats
             response.json().then(function(data){
 stats1=data
+responseArray.push("city1")
+showStats(city1,city2)
+            })
+        })
+        .catch(err => {
+            console.error(err);
+        });
+
+    });
+})
+.catch(err => {
+	console.error(err);
+});
+promiseArray.push("city2")
 fetch("https://api-nba-v1.p.rapidapi.com/teams?search="+city2, {
 	"method": "GET",
 	"headers": {
@@ -51,6 +68,7 @@ fetch("https://api-nba-v1.p.rapidapi.com/teams?search="+city2, {
                 console.log(data)
                 // heres where I end up showing the stats, and I pass through both cities still 
 stats2=data
+responseArray.push("city2")
 showStats(city1,city2)
             })
         })
@@ -63,18 +81,6 @@ showStats(city1,city2)
 .catch(err => {
 	console.error(err);
 });
-            })
-        })
-        .catch(err => {
-            console.error(err);
-        });
-
-    });
-})
-.catch(err => {
-	console.error(err);
-});
-
 
 
 }
@@ -82,11 +88,7 @@ showStats(city1,city2)
 
 // this lets me show all the stats on the page!
 function showStats(city1,city2){
-// console.log(Object.keys(stats1.response[0]).length)
-// console.log(Object.keys(stats2.response[0]).length)
-// console.log(Object.keys(stats2.response[0])[0])
-// console.log(stats1.response[0][1])
-
+if (responseArray.length===promiseArray.length){
 
 // adds city names to their respective containers
 var city1NameEl = document.createElement("h2")
@@ -108,19 +110,23 @@ currentStat2El.textContent = Object.keys(stats2.response[0])[i] + ": " + Object.
 if (Object.values(stats1.response[0])[i] >Object.values(stats2.response[0])[i]) {
     currentStat1El.classList.add("green")
     currentStat2El.classList.add("red")
+    currentStat1El.style.fontWeight = "bold"
 }
 else if (Object.values(stats1.response[0])[i] < Object.values(stats2.response[0])[i]) {
     currentStat1El.classList.add("red")
     currentStat2El.classList.add("green")
+    currentStat2El.style.fontWeight = "bold"
 }
 else if (Object.values(stats1.response[0])[i] === Object.values(stats2.response[0])[i]) {
     currentStat1El.classList.add("blue")
     currentStat2El.classList.add("blue")
+    currentStat1El.style.fontWeight = "bold"
+    currentStat2El.style.fontWeight = "bold"
 }
 statEl1.appendChild(currentStat1El)
 statEl2.appendChild(currentStat2El)
 }
-}
+}}
 
 // test run of the function
 getStats('atlanta','new york')
