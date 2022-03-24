@@ -18,6 +18,10 @@ header h1 {
     flex: 50%;
 }
 
+#formOne {
+    display: flex;
+}
+
 .ui-menu-item {
     list-style: none;
 }
@@ -26,4 +30,13 @@ header h1 {
     max-height: 100px;
     overflow-y: auto;
     overflow-x: hidden;
+}
+#savedCity {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.versus {
+    border-color: black;
+    border-radius: 3px;
 }

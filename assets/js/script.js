@@ -2,6 +2,9 @@ var statEl1 = document.querySelector("#city1Stats");
 var statEl2 = document.querySelector("#city2Stats");
 // sets stats as global since I call them in two functions
 
+var formOneEl = document.querySelector("#formOne");
+var savedCityEl = document.querySelector("#savedCity");
+
 var teamName = []
 // does 4 api calls to get our stats for the two teams
 async function getStats(city) {
@@ -107,6 +110,21 @@ console.log(data)
   console.log(teamName)
 }
 
+// check form and submit cities
+var submitCities = function(submitForm) {
+    submitForm.preventDefault();
+    var city1Name = document.querySelector("#searchBox1").value.trim();
+    var city2Name = document.querySelector("#searchBox2").value.trim();
+    console.log(city1Name);
+    console.log(city2Name);
+        if (!city1Name || !city2Name) {
+        alert("You haven't entered your name!");
+    } else {
+        storeCities(city1Name, city2Name);
+        showStats(city1Name, city2Name);
+    }
+}
+
 // autocomplete cities that have NBA teams
 $(function () {
     var availableTags = [
@@ -128,7 +146,7 @@ $(function () {
         "Milwaukee",
         "Minneapolis",
         "New Orleans",
-        "New York City",
+        "New York",
         "Oklahoma City",
         "Orlando",
         "Philadelphia",
@@ -145,6 +163,31 @@ $(function () {
     });
 });
 
+// save to localstorage
+var storeCities = function(city1Name, city2Name) {
+    var lastCities = {city1Name: city1Name, city2Name: city2Name};
+    localStorage.setItem("lastcities", JSON.stringify(lastCities));
+}
+
+// load from localstorage
+var loadCities = function() {
+    lastCities = JSON.parse(localStorage.getItem("lastcities"));
+    if (lastCities) {
+        console.log(lastCities.city1Name, lastCities.city2Name);
+        writeCities(lastCities.city1Name, lastCities.city2Name);
+    }  
+}
+
+// write last set of cities to page
+var writeCities = function(city1Name, city2Name) {
+    var cityListEl = document.createElement("p");
+    cityListEl.innerHTML = "<span class='versus' data-city1='" + city1Name + "' data-city2='" + city1Name + "'>Last Search: " + city1Name + " vs " + city2Name + "</span>";
+    savedCityEl.appendChild(cityListEl);
+//    savedCityEl.addEventListener("click", showStats(city1Name, city2Name));
+}
+
 // test run of the function
 // showStats("atlanta", "new york");
 
+formOneEl.addEventListener("submit", submitCities);
+loadCities();
