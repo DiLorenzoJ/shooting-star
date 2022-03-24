@@ -6,15 +6,16 @@ body {
 
 header h1 {
     text-align: center;
-    display: flex;
-
+    display: block;
+    color: #f86624;
 }
 
-.teams {
+.row {
     display: flex;
-    padding: auto;
-    background-color: orangered;
-    margin: 0 auto;
+}
+
+.colomn {
+    flex: 50%;
 }
 
 .ui-menu-item {
