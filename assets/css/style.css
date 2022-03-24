@@ -1,13 +1,20 @@
-.container {
+body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-body {
+header h1 {
+    text-align: center;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+
+}
+
+.teams {
+    display: flex;
+    padding: auto;
+    background-color: orangered;
+    margin: 0 auto;
 }
 
 .ui-menu-item {

@@ -6,8 +6,8 @@ var stats2=''
 var promiseArray = []
 var responseArray = []
 // does 4 api calls to get our stats for the two teams
- function getStats(city1,city2) {
-     promiseArray.push("city1")
+function getStats(city1,city2) {
+    promiseArray.push("city1")
     //  first fetch takes the city name and searches for a team so I can get its id, because it looks like the stats page needs team id and not the team city.
     fetch("https://api-nba-v1.p.rapidapi.com/teams?search="+city1, {
 	"method": "GET",
@@ -188,4 +188,5 @@ $( function() {
   } );
 
 // test run of the function
-getStats('atlanta','new york')
+getStats()
+// getStats();
