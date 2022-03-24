@@ -1,11 +1,29 @@
-.container {
+body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-body {
+header h1 {
+    text-align: center;
+    display: block;
+    color: #f86624;
+}
+
+.row {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+}
+
+.colomn {
+    flex: 50%;
+}
+
+.ui-menu-item {
+    list-style: none;
+}
+
+.ui-autocomplete {
+    max-height: 100px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
