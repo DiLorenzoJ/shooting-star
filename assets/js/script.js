@@ -55,7 +55,8 @@ async function showStats(city1, city2) {
   ]);
 //   console.log(firstResult);
 //   console.log(secondResult);
-
+var data = await fetch('https://www.thesportsdb.com/api/v1/json/2/searchevents.php?e='+teamName[0]+'_vs_Atlanta%20Hawks')
+console.log(data)
   // adds city names to their respective containers
   var city1NameEl = document.createElement("h2");
   var city2NameEl = document.createElement("h2");
