@@ -2,6 +2,8 @@ var statEl1 = document.querySelector("#city1Stats");
 var statEl2 = document.querySelector("#city2Stats");
 // sets stats as global since I call them in two functions
 
+var formOneEl = document.querySelector("#formOne");
+
 var teamName = []
 // does 4 api calls to get our stats for the two teams
 async function getStats(city) {
@@ -107,6 +109,21 @@ console.log(data)
   console.log(teamName)
 }
 
+
+// check form and submit cities
+var submitCities = function(submitForm) {
+    submitForm.preventDefault();
+    var city1Name = document.querySelector("#searchBox1").value.trim();
+    var city2Name = document.querySelector("#searchBox2").value.trim();
+    console.log(city1Name);
+    console.log(city2Name);
+        if (!city1Name || !city2Name) {
+        alert("You haven't entered your name!");
+    } else {
+        showStats(city1Name, city2Name);
+    }
+}
+
 // autocomplete cities that have NBA teams
 $(function () {
     var availableTags = [
@@ -148,3 +165,4 @@ $(function () {
 // test run of the function
 // showStats("atlanta", "new york");
 
+formOneEl.addEventListener("submit", submitCities);

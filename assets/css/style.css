@@ -18,6 +18,10 @@ header h1 {
     flex: 50%;
 }
 
+#formOne {
+    display: flex;
+}
+
 .ui-menu-item {
     list-style: none;
 }
