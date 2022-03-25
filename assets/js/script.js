@@ -1,6 +1,6 @@
+// set up global variables
 var statEl1 = document.querySelector("#city1Stats");
 var statEl2 = document.querySelector("#city2Stats");
-// sets stats as global since I call them in two functions
 
 var formOneEl = document.querySelector("#formOne");
 
@@ -118,8 +118,8 @@ var submitCities = function(submitForm) {
     submitForm.preventDefault();
     var city1Name = document.querySelector("#searchBox1").value.trim();
     var city2Name = document.querySelector("#searchBox2").value.trim();
-    console.log(city1Name);
-    console.log(city2Name);
+    // console.log(city1Name);
+    // console.log(city2Name);
         if (!city1Name || !city2Name) {
         alert("You haven't entered your name!");
     } else {
@@ -172,19 +172,22 @@ $(function () {
 var storeCities = function(city1Name, city2Name) {
     var lastCities = {city1Name: city1Name, city2Name: city2Name};
     localStorage.setItem("lastcities", JSON.stringify(lastCities));
+    writeCities(lastCities.city1Name, lastCities.city2Name);
 }
 
 // load from localstorage
 var loadCities = function() {
     lastCities = JSON.parse(localStorage.getItem("lastcities"));
+    // check to see if data exists
     if (lastCities) {
-        console.log(lastCities.city1Name, lastCities.city2Name);
+        // console.log(lastCities.city1Name, lastCities.city2Name);
         writeCities(lastCities.city1Name, lastCities.city2Name);
     }  
 }
 
 // write last set of cities to page
 var writeCities = function(city1Name, city2Name) {
+    savedCityEl.innerHTML ="";
     var cityListEl = document.createElement("p");
     cityListEl.innerHTML = "<span class='versus' data-city1='" + city1Name + "' data-city2='" + city1Name + "'>Last Search: " + city1Name + " vs " + city2Name + "</span>";
     savedCityEl.appendChild(cityListEl);
@@ -194,7 +197,8 @@ var writeCities = function(city1Name, city2Name) {
 // test run of the function
 // showStats("atlanta", "new york");
 
-
+// listens for submit event
 formOneEl.addEventListener("submit", submitCities);
-loadCities();
 
+// call to run localscorage check on load
+loadCities();
