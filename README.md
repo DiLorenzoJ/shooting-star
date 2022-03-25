@@ -9,11 +9,15 @@ A website that gives you current stats of NBA/NHL.
 * JS
 
 ## Website
-placeholder
+https://dilorenzoj.github.io/shooting-star/
+
+## Screenshot
+
+![Shooting Star](./assets/images/screenshot.png)
 
 ## Contribution
 Made By:
 * Matthew Allen
 * Rob Young
 * Kajiam Jeffers
-*Johnathan Dilorenzo
+* Johnathan Dilorenzo
