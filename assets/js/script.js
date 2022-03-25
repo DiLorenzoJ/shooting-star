@@ -3,7 +3,9 @@ var statEl2 = document.querySelector("#city2Stats");
 // sets stats as global since I call them in two functions
 
 var formOneEl = document.querySelector("#formOne");
+
 var savedCityEl = document.querySelector("#savedCity");
+
 
 var teamName = []
 // does 4 api calls to get our stats for the two teams
@@ -110,6 +112,7 @@ console.log(data)
   console.log(teamName)
 }
 
+
 // check form and submit cities
 var submitCities = function(submitForm) {
     submitForm.preventDefault();
@@ -120,7 +123,9 @@ var submitCities = function(submitForm) {
         if (!city1Name || !city2Name) {
         alert("You haven't entered your name!");
     } else {
+
         storeCities(city1Name, city2Name);
+
         showStats(city1Name, city2Name);
     }
 }
@@ -189,5 +194,7 @@ var writeCities = function(city1Name, city2Name) {
 // test run of the function
 // showStats("atlanta", "new york");
 
+
 formOneEl.addEventListener("submit", submitCities);
 loadCities();
+
