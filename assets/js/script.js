@@ -6,6 +6,7 @@ var formOneEl = document.querySelector("#formOne");
 var savedCityEl = document.querySelector("#savedCity");
 
 var teamName = []
+
 // does 4 api calls to get our stats for the two teams
 async function getStats(city) {
 
