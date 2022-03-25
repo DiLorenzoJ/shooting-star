@@ -4,6 +4,9 @@ var statEl2 = document.querySelector("#city2Stats");
 
 var formOneEl = document.querySelector("#formOne");
 
+var savedCityEl = document.querySelector("#savedCity");
+
+
 var teamName = []
 // does 4 api calls to get our stats for the two teams
 async function getStats(city) {
@@ -120,6 +123,9 @@ var submitCities = function(submitForm) {
         if (!city1Name || !city2Name) {
         alert("You haven't entered your name!");
     } else {
+
+        storeCities(city1Name, city2Name);
+
         showStats(city1Name, city2Name);
     }
 }
@@ -145,7 +151,7 @@ $(function () {
         "Milwaukee",
         "Minneapolis",
         "New Orleans",
-        "New York City",
+        "New York",
         "Oklahoma City",
         "Orlando",
         "Philadelphia",
@@ -162,7 +168,33 @@ $(function () {
     });
 });
 
+// save to localstorage
+var storeCities = function(city1Name, city2Name) {
+    var lastCities = {city1Name: city1Name, city2Name: city2Name};
+    localStorage.setItem("lastcities", JSON.stringify(lastCities));
+}
+
+// load from localstorage
+var loadCities = function() {
+    lastCities = JSON.parse(localStorage.getItem("lastcities"));
+    if (lastCities) {
+        console.log(lastCities.city1Name, lastCities.city2Name);
+        writeCities(lastCities.city1Name, lastCities.city2Name);
+    }  
+}
+
+// write last set of cities to page
+var writeCities = function(city1Name, city2Name) {
+    var cityListEl = document.createElement("p");
+    cityListEl.innerHTML = "<span class='versus' data-city1='" + city1Name + "' data-city2='" + city1Name + "'>Last Search: " + city1Name + " vs " + city2Name + "</span>";
+    savedCityEl.appendChild(cityListEl);
+//    savedCityEl.addEventListener("click", showStats(city1Name, city2Name));
+}
+
 // test run of the function
 // showStats("atlanta", "new york");
 
+
 formOneEl.addEventListener("submit", submitCities);
+loadCities();
+
