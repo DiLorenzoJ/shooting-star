@@ -186,6 +186,9 @@ $(function () {
 
 // save to localstorage
 var storeCities = function(city1Name, city2Name) {
+  if (lastCities.length === 0) {
+    savedCityEl.innerHTML ="<h3>Previous Searches</h3>";
+  }  
   var lastCity = {city1Name,city2Name}
     lastCities.push(lastCity);
     localStorage.setItem("lastcities", JSON.stringify(lastCities));
@@ -194,10 +197,10 @@ var storeCities = function(city1Name, city2Name) {
 
 // load from localstorage
 var loadCities = function() {
-  savedCityEl.innerHTML ="<h3>Previous Searches</h3>";
     lastCities = JSON.parse(localStorage.getItem("lastcities"));
     // check to see if data exists
     if (lastCities) {
+      savedCityEl.innerHTML ="<h3>Previous Searches</h3>";
         // console.log(lastCities.city1Name, lastCities.city2Name);
         for (i=0;i<lastCities.length;i++) {
           writeCities(lastCities[i].city1Name, lastCities[i].city2Name);
