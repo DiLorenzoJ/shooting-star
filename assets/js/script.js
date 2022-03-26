@@ -5,10 +5,14 @@ var statEl2 = document.querySelector("#city2Stats");
 var formOneEl = document.querySelector("#formOne");
 
 var savedCityEl = document.querySelector("#savedCity");
+var versusStatsEl = document.querySelector("#versusStats");
+
 
 var lastCities = []
 
 var teamName = []
+
+var lastGame = []
 
 // does 4 api calls to get our stats for the two teams
 async function getStats(city) {
@@ -60,8 +64,10 @@ async function showStats(city1, city2) {
   ]);
 //   console.log(firstResult);
 //   console.log(secondResult);
-var data = await fetch('https://www.thesportsdb.com/api/v1/json/2/searchevents.php?e='+teamName[0]+'_vs_Atlanta%20Hawks')
-console.log(data)
+var dataTwo = await fetch('https://www.thesportsdb.com/api/v1/json/2/searchevents.php?e='+teamName[0]+'_vs_'+teamName[1]);
+const data = await dataTwo.json();
+lastGame = data.event[0];
+versusStats(lastGame);
   // adds city names to their respective containers
   statEl2.replaceChildren("");
   statEl1.replaceChildren("");
@@ -116,6 +122,13 @@ console.log(data)
   console.log(teamName)
 }
 
+var versusStats = function(lastGame) {
+  console.log(lastGame);
+  var lastGameEl = document.createElement("div");
+  lastGameEl.innerHTML = "<h2>Laast Game ()</h2><h3>" + lastGame.strEventAlternate + "</h3<p><h4>" + lastGame.strHomeTeam + " : " + lastGame.intHomeScore + " ||| " + lastGame.intAwayScore + " : " + lastGame.strAwayTeam + "</h4>";
+  console.log(lastGameEl);
+  versusStatsEl.appendChild(lastGameEl);
+}
 
 // check form and submit cities
 var submitCities = function(submitForm) {
