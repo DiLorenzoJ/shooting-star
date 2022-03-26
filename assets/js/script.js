@@ -63,6 +63,8 @@ async function showStats(city1, city2) {
 var data = await fetch('https://www.thesportsdb.com/api/v1/json/2/searchevents.php?e='+teamName[0]+'_vs_Atlanta%20Hawks')
 console.log(data)
   // adds city names to their respective containers
+  statEl2.replaceChildren("");
+  statEl1.replaceChildren("");
   var city1NameEl = document.createElement("h2");
   var city2NameEl = document.createElement("h2");
   city1NameEl.textContent = stats1.city;
@@ -199,8 +201,8 @@ var loadCities = function() {
 // write last set of cities to page
 var writeCities = function(city1Name, city2Name) {
    
-    var cityListEl = document.createElement("p");
-    cityListEl.innerHTML = "<span class='city1' >" + city1Name + " </span> vs <span   class = 'city2' >" + city2Name + "</span> ";
+    var cityListEl = document.createElement("ul");
+    cityListEl.innerHTML = "<li class='pure-button'><span class='city1' >" + city1Name + " </span> vs <span class = 'city2' >" + city2Name + "</span></li>";
     savedCityEl.appendChild(cityListEl);
 
 }
