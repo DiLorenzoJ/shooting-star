@@ -6,6 +6,7 @@ var formOneEl = document.querySelector("#formOne");
 
 var savedCityEl = document.querySelector("#savedCity");
 
+var lastCities = []
 
 var teamName = []
 
@@ -122,7 +123,7 @@ var submitCities = function(submitForm) {
     // console.log(city1Name);
     // console.log(city2Name);
         if (!city1Name || !city2Name) {
-        alert("You haven't entered your name!");
+        alert("You haven't entered both team names!");
     } else {
 
         storeCities(city1Name, city2Name);
@@ -171,30 +172,57 @@ $(function () {
 
 // save to localstorage
 var storeCities = function(city1Name, city2Name) {
-    var lastCities = {city1Name: city1Name, city2Name: city2Name};
+  var lastCity = {city1Name,city2Name}
+    lastCities.push(lastCity);
     localStorage.setItem("lastcities", JSON.stringify(lastCities));
-    writeCities(lastCities.city1Name, lastCities.city2Name);
+     writeCities(city1Name,city2Name);
 }
 
 // load from localstorage
 var loadCities = function() {
+  savedCityEl.innerHTML ="<h3>Previous Searches</h3>";
     lastCities = JSON.parse(localStorage.getItem("lastcities"));
     // check to see if data exists
     if (lastCities) {
         // console.log(lastCities.city1Name, lastCities.city2Name);
-        writeCities(lastCities.city1Name, lastCities.city2Name);
+        for (i=0;i<lastCities.length;i++) {
+          writeCities(lastCities[i].city1Name, lastCities[i].city2Name);
+        }
+        // 
+         console.log(lastCities)
     }  
+    else {
+      lastCities = []
+}
 }
 
 // write last set of cities to page
 var writeCities = function(city1Name, city2Name) {
-    savedCityEl.innerHTML ="";
+   
     var cityListEl = document.createElement("p");
-    cityListEl.innerHTML = "<span class='versus' data-city1='" + city1Name + "' data-city2='" + city1Name + "'>Last Search: " + city1Name + " vs " + city2Name + "</span>";
+    cityListEl.innerHTML = "<span class='city1' >" + city1Name + " </span> vs <span   class = 'city2' >" + city2Name + "</span> ";
     savedCityEl.appendChild(cityListEl);
-//    savedCityEl.addEventListener("click", showStats(city1Name, city2Name));
+
 }
 
+
+function loadSavedSearch(event) {
+  if (event.target.classList =='city1') {
+  var city1 = event.target.textContent
+  var city2 = event.target.nextElementSibling.textContent
+  }
+
+  else if (event.target.classList =='city2') {
+    city1 = event.target.previousElementSibling.textContent
+    city2 = event.target.textContent
+    }
+    else {
+      return
+    }
+    showStats(city1,city2)
+}
+
+   savedCityEl.addEventListener("click", function(event){loadSavedSearch(event)});
 // test run of the function
 // showStats("atlanta", "new york");
 
