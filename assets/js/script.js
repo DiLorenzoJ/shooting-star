@@ -1,7 +1,7 @@
 // set up global variables
 var statEl1 = document.querySelector("#city1Stats");
 var statEl2 = document.querySelector("#city2Stats");
-const api2 = document.querySelector(".api2")
+var api2Title = document.querySelector(".api2Title")
 var formOneEl = document.querySelector("#formOne");
 
 var savedCityEl = document.querySelector("#savedCity");
@@ -61,11 +61,12 @@ async function showStats(city1, city2) {
 //   console.log(secondResult);
 var data = await fetch('https://www.thesportsdb.com/api/v1/json/2/searchevents.php?e='+teamName[0] + '_vs_' + teamName[1]);
 var dataJson = await data.json();
-  //for loop to diplay this information
-  //  for (let i = 0; i < 5 ; i++){
-  console.log(dataJson.event[0])    
-  return dataJson;
- //   }
+
+      console.log(dataJson.event[0].strFilename);
+      console.log(dataJson.event[0].intHomeScore);
+      console.log(dataJson.event[0].intAwayScore);
+      console.log(dataJson.event[0].strThumb);
+ // }
     
   // adds city names to their respective containers
   var city1NameEl = document.createElement("h2");
