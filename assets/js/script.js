@@ -61,16 +61,11 @@ async function showStats(city1, city2) {
     getStats(city1),
     getStats(city2),
   ]);
-//   console.log(firstResult);
-//   console.log(secondResult);
+//   second call fetch:
 var data = await fetch('https://www.thesportsdb.com/api/v1/json/2/searchevents.php?e=' + teamName[0] + '_vs_' + teamName[1]);
 var dataJson = await data.json();
 
- // for (let i = 0; i < dataJson.event.length; i++) {
- //   if (dataJson.event[i] = strFilename) {
-   //   api2Title.innerHTML(`<h3>${strFilename}</h3>`);
-//    }
- // }
+ // display the info on that second call
     api2Title.textContent = dataJson.event[0].strFilename;
     api2Pic.setAttribute("src", dataJson.event[0].strThumb); 
     homeScore.textContent = `${teamName[0]} ${dataJson.event[0].intHomeScore}`;
@@ -80,7 +75,7 @@ var dataJson = await data.json();
       console.log(dataJson.event[0].intAwayScore);
       console.log(dataJson.event[0].strThumb);
 
-     // api2Title.appendChild = `<h3>${dataJson.event[0].strFilename}<h3>`
+    
     
   // adds city names to their respective containers
   var city1NameEl = document.createElement("h2");
