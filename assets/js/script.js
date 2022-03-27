@@ -1,8 +1,12 @@
 // set up global variables
 var statEl1 = document.querySelector("#city1Stats");
 var statEl2 = document.querySelector("#city2Stats");
-var api2Title = document.querySelector(".api2Title")
+// var api2 = document.querySelector("#endregionapi2");
+var api2Title = document.querySelector("#api2Title");
 var formOneEl = document.querySelector("#formOne");
+var homeScore = document.getElementById("homeScore");
+var awayScore = document.getElementById("awayScore");
+var api2Pic = document.getElementById("api2Pic");
 
 var savedCityEl = document.querySelector("#savedCity");
 
@@ -59,14 +63,24 @@ async function showStats(city1, city2) {
   ]);
 //   console.log(firstResult);
 //   console.log(secondResult);
-var data = await fetch('https://www.thesportsdb.com/api/v1/json/2/searchevents.php?e='+teamName[0] + '_vs_' + teamName[1]);
+var data = await fetch('https://www.thesportsdb.com/api/v1/json/2/searchevents.php?e=' + teamName[0] + '_vs_' + teamName[1]);
 var dataJson = await data.json();
 
+ // for (let i = 0; i < dataJson.event.length; i++) {
+ //   if (dataJson.event[i] = strFilename) {
+   //   api2Title.innerHTML(`<h3>${strFilename}</h3>`);
+//    }
+ // }
+    api2Title.textContent = dataJson.event[0].strFilename;
+    api2Pic.setAttribute("src", dataJson.event[0].strThumb); 
+    homeScore.textContent = `${teamName[0]} ${dataJson.event[0].intHomeScore}`;
+    awayScore.textContent = `${teamName[1]} ${dataJson.event[0].intAwayScore}`;
       console.log(dataJson.event[0].strFilename);
       console.log(dataJson.event[0].intHomeScore);
       console.log(dataJson.event[0].intAwayScore);
       console.log(dataJson.event[0].strThumb);
- // }
+
+     // api2Title.appendChild = `<h3>${dataJson.event[0].strFilename}<h3>`
     
   // adds city names to their respective containers
   var city1NameEl = document.createElement("h2");
