@@ -32,16 +32,17 @@ header h1 {
     overflow-x: hidden;
 }
 
-#savedCity {
+/* #savedCity {
     font-size: 28px;
     font-weight: bold;
-}
+} */
 
 .versus {
     border-color: black;
     border-radius: 3px;
 }
 
+/* force a line break in divs */
 .break {
     flex-basis: 100%;
     height: 0;
@@ -63,4 +64,31 @@ header h1 {
 
 #awayScore {
     display: inline-block;
+}
+
+/* spacing between columns */
+#stat2 {
+    padding-left: 15px;
+}
+
+/* invisible padding to align stats */
+.invis {
+    color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
+    cursor: default;
+    user-select: unset;
+    font-family: inherit;
+    font-size: 100%;
+    padding: .5em 1em;
+    border: none transparent;
+    text-decoration: none;
+    border-radius: 2px;
+    display: inline-block;
+    line-height: normal;
+    white-space: nowrap;
+    vertical-align: middle;
+    text-align: center;
+    box-sizing: border-box;
+    font-weight: normal;
+    width: 131px;
 }
