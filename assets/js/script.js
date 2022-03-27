@@ -1,9 +1,9 @@
 // set up global variables
 var statEl1 = document.querySelector("#city1Stats");
 var statEl2 = document.querySelector("#city2Stats");
-// var api2 = document.querySelector("#endregionapi2");
-var api2Title = document.querySelector("#api2Title");
-var formOneEl = document.querySelector("#formOne");
+var api2 = document.getElementById("api2");
+var api2Title = document.getElementById("api2Title");
+var formOneEl = document.getElementById("formOne");
 var homeScore = document.getElementById("homeScore");
 var awayScore = document.getElementById("awayScore");
 var api2Pic = document.getElementById("api2Pic");

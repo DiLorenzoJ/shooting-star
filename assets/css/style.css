@@ -46,3 +46,21 @@ header h1 {
     flex-basis: 100%;
     height: 0;
 }
+
+#api2 {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#api2Pic {
+    max-width: 400px;
+    max-height: 300px;
+}
+
+#homeScore {
+    display: inline-block;
+}
+
+#awayScore {
+    display: inline-block;
+}
