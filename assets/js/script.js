@@ -123,6 +123,7 @@ versusStats(lastGame);
 }
 
 var versusStats = function(lastGame) {
+  versusStatsEl.replaceChildren("");
   console.log(lastGame);
   var lastGameEl = document.createElement("div");
   lastGameEl.innerHTML = "<h5>Laast Game (" + lastGame.dateEvent + ")</h5><p><h4>" + lastGame.strEventAlternate + "</h4<p><h5>" + lastGame.strHomeTeam + " : " + lastGame.intHomeScore + " ||| " + lastGame.intAwayScore + " : " + lastGame.strAwayTeam + "</h5>";
