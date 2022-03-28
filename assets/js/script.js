@@ -146,8 +146,8 @@ var submitCities = function(submitForm) {
 
         storeCities(city1Name, city2Name);
         showStats(city1Name, city2Name);
-        document.querySelector("#searchBox1").value("");
-        document.querySelector("#searchBox2").value("");
+        document.querySelector("#searchBox1").value = "";
+        document.querySelector("#searchBox2").value = "";
     }
 }
 
