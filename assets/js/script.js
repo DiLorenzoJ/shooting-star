@@ -141,7 +141,17 @@ var submitCities = function(submitForm) {
     // console.log(city1Name);
     // console.log(city2Name);
         if (!city1Name || !city2Name) {
-        alert("You haven't entered both team names!");
+          // alert("You haven't entered both team names!");
+          $(function () {
+            $("#dialog").dialog({
+              modal: true,
+              draggable: false,
+              resizable: false,
+              classes: {
+                "ui-dialog": "modal"
+              }
+            });
+          });
     } else {
 
         storeCities(city1Name, city2Name);
