@@ -1,8 +1,12 @@
 // set up global variables
 var statEl1 = document.querySelector("#city1Stats");
 var statEl2 = document.querySelector("#city2Stats");
-
-var formOneEl = document.querySelector("#formOne");
+var api2 = document.getElementById("api2");
+var api2Title = document.getElementById("api2Title");
+var formOneEl = document.getElementById("formOne");
+var homeScore = document.getElementById("homeScore");
+var awayScore = document.getElementById("awayScore");
+var api2Pic = document.getElementById("api2Pic");
 
 var savedCityEl = document.querySelector("#savedCity");
 
@@ -58,10 +62,22 @@ async function showStats(city1, city2) {
     getStats(city1),
     getStats(city2),
   ]);
-//   console.log(firstResult);
-//   console.log(secondResult);
-var data = await fetch('https://www.thesportsdb.com/api/v1/json/2/searchevents.php?e='+teamName[0]+'_vs_Atlanta%20Hawks')
-console.log(data)
+//   second call fetch:
+var data = await fetch('https://www.thesportsdb.com/api/v1/json/2/searchevents.php?e=' + teamName[0] + '_vs_' + teamName[1]);
+var dataJson = await data.json();
+
+ // display the info on that second call
+    api2Title.textContent = dataJson.event[0].strFilename;
+    api2Pic.setAttribute("src", dataJson.event[0].strThumb); 
+    homeScore.textContent = `${teamName[0]} ${dataJson.event[0].intHomeScore}`;
+    awayScore.textContent = `${teamName[1]} ${dataJson.event[0].intAwayScore}`;
+      console.log(dataJson.event[0].strFilename);
+      console.log(dataJson.event[0].intHomeScore);
+      console.log(dataJson.event[0].intAwayScore);
+      console.log(dataJson.event[0].strThumb);
+
+    
+    
   // adds city names to their respective containers
   statEl2.replaceChildren("");
   statEl1.replaceChildren("");
@@ -129,8 +145,9 @@ var submitCities = function(submitForm) {
     } else {
 
         storeCities(city1Name, city2Name);
-
         showStats(city1Name, city2Name);
+        document.querySelector("#searchBox1").value("");
+        document.querySelector("#searchBox2").value("");
     }
 }
 
@@ -174,28 +191,31 @@ $(function () {
 
 // save to localstorage
 var storeCities = function(city1Name, city2Name) {
+  if (lastCities.length === 0) {
+  savedCityEl.innerHTML ="<h3>Previous Searches</h3>";
+  }  
   var lastCity = {city1Name,city2Name}
-    lastCities.push(lastCity);
-    localStorage.setItem("lastcities", JSON.stringify(lastCities));
-     writeCities(city1Name,city2Name);
+  lastCities.push(lastCity);
+  localStorage.setItem("lastcities", JSON.stringify(lastCities));
+   writeCities(city1Name,city2Name);
 }
 
 // load from localstorage
-var loadCities = function() {
-  savedCityEl.innerHTML ="<h3>Previous Searches</h3>";
-    lastCities = JSON.parse(localStorage.getItem("lastcities"));
-    // check to see if data exists
-    if (lastCities) {
-        // console.log(lastCities.city1Name, lastCities.city2Name);
-        for (i=0;i<lastCities.length;i++) {
-          writeCities(lastCities[i].city1Name, lastCities[i].city2Name);
-        }
-        // 
-         console.log(lastCities)
-    }  
-    else {
-      lastCities = []
-}
+var loadCities = function () {
+  lastCities = JSON.parse(localStorage.getItem("lastcities"));
+  // check to see if data exists
+  if (lastCities) {
+    savedCityEl.innerHTML = "<h3>Previous Searches</h3>";
+    // console.log(lastCities.city1Name, lastCities.city2Name);
+    for (i = 0; i < lastCities.length; i++) {
+      writeCities(lastCities[i].city1Name, lastCities[i].city2Name);
+    }
+    // 
+    console.log(lastCities)
+  }
+  else {
+    lastCities = []
+  }
 }
 
 // write last set of cities to page
